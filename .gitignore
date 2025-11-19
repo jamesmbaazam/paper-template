@@ -47,3 +47,38 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Julia specific
+.julia/
+Manifest.toml
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+
+# Quarto
+/.quarto/
+_site/
+_book/
+_freeze/
+*_files/
+*.html
+*.pdf
+
+# Output directories
+/output/
+/data/processed/
+
+# Build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# OS specific
+.DS_Store
+Thumbs.db

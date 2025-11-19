@@ -1,0 +1,55 @@
+project:
+  type: default
+  output-dir: _output
+  execute-dir: project
+
+execute:
+  freeze: auto
+  cache: true
+  daemon: false
+
+format:
+  pdf:
+    documentclass: article
+    papersize: letter
+    fontsize: 11pt
+    geometry:
+      - margin=1in
+    number-sections: true
+    colorlinks: true
+    keep-tex: true
+    include-in-header:
+      text: |
+        \usepackage{booktabs}
+        \usepackage{longtable}
+        \usepackage{array}
+        \usepackage{multirow}
+        \usepackage{float}
+        \usepackage{graphicx}
+
+bibliography: paper/references.bib
+csl: https://www.zotero.org/styles/apa
+cite-method: citeproc
+
+crossref:
+  fig-title: Figure
+  tbl-title: Table
+  eq-prefix: Equation
+  sec-prefix: Section
+
+engine: knitr
+
+knitr:
+  opts_chunk:
+    echo: false
+    warning: false
+    message: false
+    fig.path: "output/figures/"
+    fig.width: 7
+    fig.height: 5
+    dpi: 300
+    dev: "png"
+
+julia:
+  daemon: false
+  exeflags: ["--project=@.", "--threads=auto"]
