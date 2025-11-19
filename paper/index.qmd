@@ -1,0 +1,153 @@
+---
+title: "Your Paper Title Here"
+author:
+  - name: Author One
+    affiliations:
+      - name: Institution Name
+        department: Department Name
+        address: Address
+        city: City
+        country: Country
+    email: author1@institution.edu
+    orcid: 0000-0000-0000-0000
+  - name: Author Two
+    affiliations:
+      - name: Another Institution
+    email: author2@institution.edu
+date: today
+abstract: |
+  This is the abstract of your paper. It should provide a concise summary of the background, methods, results, and conclusions of your research. Keep it to 150-250 words for most journals.
+keywords:
+  - keyword1
+  - keyword2
+  - keyword3
+format:
+  pdf:
+    template-partials:
+      - title.tex
+---
+
+# Introduction {#sec-introduction}
+
+This is the introduction section. You can cite references like this [@example2024]. You can also cite multiple references [@example2024; @another2023].
+
+Cross-references to sections work like this: see @sec-methods for details on the methodology.
+
+# Methods {#sec-methods}
+
+## Data Collection
+
+Describe your data collection methods here.
+
+## Statistical Analysis
+
+### Analysis in R
+
+Here's an example of an R code chunk that generates a figure:
+
+```{r}
+#| label: fig-example-r
+#| fig-cap: "Example figure generated with R"
+#| fig-width: 6
+#| fig-height: 4
+
+# Load libraries
+library(ggplot2)
+
+# Generate example data
+set.seed(123)
+data <- data.frame(
+  x = rnorm(100),
+  y = rnorm(100)
+)
+
+# Create plot
+ggplot(data, aes(x = x, y = y)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE) +
+  theme_minimal() +
+  labs(x = "Variable X", y = "Variable Y")
+```
+
+### Analysis in Julia
+
+Here's an example of a Julia code chunk:
+
+```{julia}
+#| label: fig-example-julia
+#| fig-cap: "Example figure generated with Julia"
+#| eval: false
+
+# using Plots
+# using Random
+#
+# Random.seed!(123)
+# x = randn(100)
+# y = randn(100)
+#
+# scatter(x, y,
+#         xlabel="Variable X",
+#         ylabel="Variable Y",
+#         legend=false,
+#         alpha=0.6)
+```
+
+Note: Uncomment the Julia code above when you have the required packages installed.
+
+## Creating Tables
+
+Here's an example table:
+
+```{r}
+#| label: tbl-example
+#| tbl-cap: "Summary statistics"
+
+library(knitr)
+
+results <- data.frame(
+  Metric = c("Mean", "SD", "N"),
+  Group_A = c(10.5, 2.3, 50),
+  Group_B = c(12.1, 2.8, 50)
+)
+
+kable(results, format = "markdown", align = c("l", "r", "r"))
+```
+
+# Results {#sec-results}
+
+Present your results here. You can reference figures like @fig-example-r and tables like @tbl-example.
+
+Key findings:
+
+- Finding 1
+- Finding 2
+- Finding 3
+
+# Discussion {#sec-discussion}
+
+Discuss your findings in the context of existing literature.
+
+## Limitations
+
+Describe the limitations of your study.
+
+## Future Directions
+
+Suggest directions for future research.
+
+# Conclusions {#sec-conclusions}
+
+Summarize the main conclusions of your work.
+
+# Acknowledgments {.unnumbered}
+
+This section is optional. Acknowledge funding sources and collaborators here.
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
+
+# Supplementary Materials {.unnumbered}
+
+If you have supplementary materials, describe them here.
