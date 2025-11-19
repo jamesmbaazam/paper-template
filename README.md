@@ -79,20 +79,15 @@ cd my-research-paper
 
 ### 2. Install Dependencies
 
-Install all R and Julia dependencies:
-
+**R dependencies:**
 ```bash
-make install
+Rscript -e "install.packages('renv')"
+Rscript -e "renv::restore()"
 ```
 
-Or install separately:
-
+**Julia dependencies:**
 ```bash
-# R dependencies
-make install-r
-
-# Julia dependencies
-make install-julia
+julia --project=. -e 'using Pkg; Pkg.instantiate()'
 ```
 
 ### 3. Set Up Pre-commit Hooks (Optional)
@@ -113,8 +108,6 @@ Edit `paper/index.qmd` to write your paper. The template includes example sectio
 Render the paper to PDF:
 
 ```bash
-make render
-# or
 quarto render paper/index.qmd
 ```
 
@@ -171,16 +164,17 @@ julia --project=. -e 'using Pkg; Pkg.add("PackageName")'
 julia --project=. -e 'using Pkg; Pkg.update()'
 ```
 
-### Available Make Targets
+### Using Make (Optional)
+
+The template includes a basic Makefile with examples. Customize it for your workflow:
 
 ```bash
-make help           # Show all available commands
-make render         # Render the paper
-make install        # Install all dependencies
-make clean          # Remove generated files
-make clean-all      # Remove all generated files including caches
-make check-spelling # Check spelling in paper
+make        # Show available targets
+make help   # Show detailed help
+make clean  # Remove generated files
 ```
+
+See the Makefile for example recipes you can uncomment or customize.
 
 ## Bibliography Management
 
