@@ -203,7 +203,7 @@ Edit `_quarto.yml` to use a different CSL style:
 csl: https://www.zotero.org/styles/nature
 ```
 
-Browse styles at: https://www.zotero.org/styles
+Browse styles at [Zotero Style Repository](https://www.zotero.org/styles)
 
 ### Changing PDF Formatting
 
