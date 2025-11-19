@@ -15,7 +15,7 @@ A comprehensive template repository for reproducible research using R and Julia 
 
 ## Directory Structure
 
-```
+```text
 paper-template/
 ├── .github/workflows/    # CI/CD pipelines
 ├── data/
