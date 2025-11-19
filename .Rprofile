@@ -1,8 +1,10 @@
 # .Rprofile for paper-template
 # This file is run when R starts up
 
-# Activate renv for dependency management
-source("renv/activate.R")
+# Activate renv for dependency management (if initialized)
+if (file.exists("renv/activate.R")) {
+  source("renv/activate.R")
+}
 
 # Set CRAN mirror
 options(repos = c(CRAN = "https://cloud.r-project.org"))
@@ -18,5 +20,7 @@ options(mc.cores = parallel::detectCores() - 1)
 if (interactive()) {
   message("Paper template project loaded")
   message("R version: ", R.version.string)
-  message("renv version: ", packageVersion("renv"))
+  if (requireNamespace("renv", quietly = TRUE)) {
+    message("renv version: ", packageVersion("renv"))
+  }
 }
