@@ -30,8 +30,6 @@ jobs:
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          version: pre-release
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
