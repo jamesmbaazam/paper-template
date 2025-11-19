@@ -1,61 +1,45 @@
-.PHONY: all clean render install help check-spelling
+# Basic Makefile template for paper-template project
+# For more on Makefiles: https://www.gnu.org/software/make/manual/make.html
 
-# Default target
-all: render
+# Phony targets (targets that don't represent files)
+.PHONY: all clean help
 
-## help: Show this help message
+# Default target - runs when you type 'make' with no arguments
+all:
+	@echo "Available targets: all, clean, help"
+	@echo "Run 'make help' for more information"
+
+# Help - displays available targets and their descriptions
 help:
-	@echo "Available targets:"
-	@echo "  all             - Render the paper (default)"
-	@echo "  render          - Render the Quarto paper to PDF"
-	@echo "  install         - Install R and Julia dependencies"
-	@echo "  install-r       - Install R dependencies using renv"
-	@echo "  install-julia   - Install Julia dependencies"
-	@echo "  clean           - Remove generated files"
-	@echo "  clean-all       - Remove all generated files including caches"
-	@echo "  check-spelling  - Check spelling in paper"
-	@echo "  help            - Show this help message"
+	@echo "Makefile targets:"
+	@echo "  make all    - Show this message"
+	@echo "  make clean  - Remove generated files"
+	@echo "  make help   - Show detailed help"
+	@echo ""
+	@echo "Add your own recipes below following this pattern:"
+	@echo "  target: dependencies"
+	@echo "  	command to execute"
 
-## render: Render the paper
-render:
-	quarto render paper/index.qmd
-
-## install: Install all dependencies
-install: install-r install-julia
-
-## install-r: Install R dependencies
-install-r:
-	Rscript -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
-	Rscript -e "renv::restore()"
-
-## install-julia: Install Julia dependencies
-install-julia:
-	julia --project=. -e 'using Pkg; Pkg.instantiate()'
-
-## clean: Remove generated output files
+# Clean - remove generated files and caches
 clean:
+	@echo "Cleaning generated files..."
 	rm -rf _output/
-	rm -rf output/figures/*
-	rm -rf output/tables/*
-	rm -rf paper/*.pdf
-	rm -rf paper/*.tex
-	rm -rf paper/*_files/
-	find . -type f -name "*.aux" -delete
-	find . -type f -name "*.log" -delete
-	find . -type f -name "*.out" -delete
-	find . -type f -name "*.synctex.gz" -delete
-
-## clean-all: Remove all generated files including caches
-clean-all: clean
 	rm -rf .quarto/
-	rm -rf _freeze/
-	rm -rf *_cache/
 
-## check-spelling: Check spelling in paper
-check-spelling:
-	@echo "Checking spelling in paper files..."
-	@if command -v aspell >/dev/null 2>&1; then \
-		aspell --lang=en --mode=tex --personal=./paper/.wordlist.txt list < paper/index.qmd | sort | uniq; \
-	else \
-		echo "aspell not found. Install with: brew install aspell (macOS) or apt-get install aspell (Linux)"; \
-	fi
+# ============================================================================
+# Add your custom recipes below this line
+# ============================================================================
+
+# Example: Render the paper
+# render:
+# 	quarto render paper/index.qmd
+
+# Example: Install dependencies
+# install:
+# 	Rscript -e "renv::restore()"
+# 	julia --project=. -e 'using Pkg; Pkg.instantiate()'
+
+# Example: Run analysis scripts
+# analyze:
+# 	Rscript scripts/R/analysis.R
+# 	julia --project=. scripts/julia/analysis.jl
