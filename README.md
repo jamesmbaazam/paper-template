@@ -56,11 +56,13 @@ paper-template/
 ### Installation Commands
 
 **macOS (using Homebrew):**
+
 ```bash
 brew install r julia quarto make aspell
 ```
 
 **Ubuntu/Debian:**
+
 ```bash
 sudo apt-get update
 sudo apt-get install r-base julia quarto-cli texlive-full make aspell
@@ -80,12 +82,14 @@ cd my-research-paper
 ### 2. Install Dependencies
 
 **R dependencies:**
+
 ```bash
 Rscript -e "install.packages('renv')"
 Rscript -e "renv::restore()"
 ```
 
 **Julia dependencies:**
+
 ```bash
 julia --project=. -e 'using Pkg; Pkg.instantiate()'
 ```
@@ -124,6 +128,7 @@ The rendered PDF will be in the `_output/` directory.
 ### Using R and Julia Code in Quarto
 
 **R code chunk:**
+
 ```r
 #| label: fig-example
 #| fig-cap: "Example figure"
@@ -133,6 +138,7 @@ ggplot(data, aes(x, y)) + geom_point()
 ```
 
 **Julia code chunk:**
+
 ```julia
 #| label: fig-example-julia
 #| fig-cap: "Julia figure"
@@ -144,6 +150,7 @@ plot(x, y)
 ### Managing Dependencies
 
 **R dependencies (using renv):**
+
 ```r
 # Install a new package
 install.packages("package_name")
@@ -156,6 +163,7 @@ renv::restore()
 ```
 
 **Julia dependencies:**
+
 ```bash
 # Add a package
 julia --project=. -e 'using Pkg; Pkg.add("PackageName")'
@@ -250,6 +258,7 @@ This template is licensed under the MIT License - see the [LICENSE](LICENSE) fil
 ### Quarto not rendering
 
 Ensure all dependencies are installed:
+
 ```bash
 quarto check install
 ```
@@ -257,6 +266,7 @@ quarto check install
 ### R package installation fails
 
 Try updating renv:
+
 ```bash
 Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
 Rscript -e "renv::restore()"
@@ -265,6 +275,7 @@ Rscript -e "renv::restore()"
 ### Julia packages not found
 
 Instantiate the Julia environment:
+
 ```bash
 julia --project=. -e 'using Pkg; Pkg.instantiate()'
 ```
@@ -272,6 +283,7 @@ julia --project=. -e 'using Pkg; Pkg.instantiate()'
 ### LaTeX errors
 
 Install the full TeXLive distribution:
+
 - macOS: `brew install --cask mactex`
 - Ubuntu: `sudo apt-get install texlive-full`
 
