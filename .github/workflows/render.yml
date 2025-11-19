@@ -39,10 +39,10 @@ jobs:
           r-version: '4.5.1'
           use-public-rspm: true
 
-      - name: Setup R dependencies
-        uses: r-lib/actions/setup-renv@v2
-        with:
-          cache-version: 1
+      - name: Install R dependencies
+        run: |
+          install.packages(c("knitr", "rmarkdown", "ggplot2"))
+        shell: Rscript {0}
 
       - name: Setup Julia
         uses: julia-actions/setup-julia@v1
