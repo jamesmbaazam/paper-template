@@ -22,9 +22,11 @@ keywords:
   - keyword2
   - keyword3
 format:
-  pdf:
-    template-partials:
-      - title.tex
+  pdf: default
+  plos-pdf:
+    keep-tex: true
+execution:
+    eval: false
 ---
 
 # Introduction {#sec-introduction}
