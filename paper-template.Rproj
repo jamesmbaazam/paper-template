@@ -16,8 +16,10 @@ AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
 LineEndingConversion: Posix
 
-PythonType: system
-PythonVersion:
-PythonPath:
+BuildType: Makefile
 
 QuitChildProcessesOnExit: Yes
+
+PythonType: system
+PythonVersion: 
+PythonPath: 
