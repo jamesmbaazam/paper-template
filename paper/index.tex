@@ -1,0 +1,331 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+  letterpaper,
+]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{graphicx}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Your Paper Title Here},
+  pdfauthor={Author One; Author Two},
+  pdfkeywords={keyword1, keyword2, keyword3},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Your Paper Title Here}
+\author{Author One \and Author Two}
+\date{2025-11-19}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+This is the abstract of your paper. It should provide a concise summary
+of the background, methods, results, and conclusions of your research.
+Keep it to 150-250 words for most journals.
+\end{abstract}
+
+\section{Introduction}\label{sec-introduction}
+
+This is the introduction section. You can cite references like this
+(Smith \& Doe, 2024). You can also cite multiple references (Johnson \&
+Williams, 2023; Smith \& Doe, 2024).
+
+Cross-references to sections work like this: see
+Section~\ref{sec-methods} for details on the methodology.
+
+\section{Methods}\label{sec-methods}
+
+\subsection{Data Collection}\label{data-collection}
+
+Describe your data collection methods here.
+
+\subsection{Statistical Analysis}\label{statistical-analysis}
+
+\subsubsection{Analysis in R}\label{analysis-in-r}
+
+Here's an example of an R code chunk that generates a figure:
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{../output/figures/fig-example-r-1.png}
+
+}
+
+\caption{\label{fig-example-r}Example figure generated with R}
+
+\end{figure}%
+
+\subsubsection{Analysis in Julia}\label{analysis-in-julia}
+
+Here's an example of a Julia code chunk:
+
+Note: Uncomment the Julia code above when you have the required packages
+installed.
+
+\subsection{Creating Tables}\label{creating-tables}
+
+Here's an example table:
+
+\begin{longtable}[]{@{}lrr@{}}
+
+\caption{\label{tbl-example}Summary statistics}
+
+\tabularnewline
+
+\toprule\noalign{}
+Metric & Group\_A & Group\_B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Mean & 10.5 & 12.1 \\
+SD & 2.3 & 2.8 \\
+N & 50.0 & 50.0 \\
+
+\end{longtable}
+
+\section{Results}\label{sec-results}
+
+Present your results here. You can reference figures like
+Figure~\ref{fig-example-r} and tables like Table~\ref{tbl-example}.
+
+Key findings:
+
+\begin{itemize}
+\tightlist
+\item
+  Finding 1
+\item
+  Finding 2
+\item
+  Finding 3
+\end{itemize}
+
+\section{Discussion}\label{sec-discussion}
+
+Discuss your findings in the context of existing literature.
+
+\subsection{Limitations}\label{limitations}
+
+Describe the limitations of your study.
+
+\subsection{Future Directions}\label{future-directions}
+
+Suggest directions for future research.
+
+\section{Conclusions}\label{sec-conclusions}
+
+Summarize the main conclusions of your work.
+
+\section*{Acknowledgments}\label{acknowledgments}
+\addcontentsline{toc}{section}{Acknowledgments}
+
+This section is optional. Acknowledge funding sources and collaborators
+here.
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-another2023}
+Johnson, A., \& Williams, B. (2023). Another example study on important
+topics. \emph{International Journal of Research}, \emph{15}(4),
+567--589. \url{https://doi.org/10.5678/research.2023.042}
+
+\bibitem[\citeproctext]{ref-example2024}
+Smith, J., \& Doe, J. (2024). An example article title. \emph{Journal of
+Example Research}, \emph{10}(2), 123--145.
+\url{https://doi.org/10.1234/example.2024.001}
+
+\end{CSLReferences}
+
+\section*{Supplementary Materials}\label{supplementary-materials}
+\addcontentsline{toc}{section}{Supplementary Materials}
+
+If you have supplementary materials, describe them here.
+
+
+
+\end{document}
