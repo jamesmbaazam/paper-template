@@ -9,6 +9,9 @@ on:
       - 'scripts/**'
       - 'data/**'
       - '_quarto.yml'
+      - 'renv.lock'
+      - 'Project.toml'
+      - '.Rprofile'
       - '.github/workflows/render.yml'
   pull_request:
     branches:
@@ -18,6 +21,9 @@ on:
       - 'scripts/**'
       - 'data/**'
       - '_quarto.yml'
+      - 'renv.lock'
+      - 'Project.toml'
+      - '.Rprofile'
   workflow_dispatch:
 
 jobs:
@@ -34,10 +40,8 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
 
-      - name: Install R dependencies
-        run: |
-          Rscript -e "install.packages('renv')"
-          Rscript -e "renv::restore()"
+      - name: Setup renv
+        uses: r-lib/actions/setup-renv@v2
 
       - name: Setup Julia
         uses: julia-actions/setup-julia@v1
@@ -59,6 +63,7 @@ jobs:
             texlive-latex-extra \
             texlive-fonts-recommended \
             texlive-fonts-extra \
+            texlive-bibtex-extra \
             texlive-xetex
 
       - name: Render Quarto document

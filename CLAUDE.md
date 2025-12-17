@@ -103,12 +103,14 @@ Custom dictionary in `paper/.wordlist.txt` includes technical terms (ggplot2, ti
 ## CI/CD Workflows
 
 ### render.yml
-Triggers on push/PR to main (with path filters). Runs on: `paper/`, `scripts/`, `data/`, `_quarto.yml`, workflow file changes.
+Triggers on push/PR to main (with path filters). Runs on: `paper/`, `scripts/`, `data/`, `_quarto.yml`, `renv.lock`, `Project.toml`, `.Rprofile`, workflow file changes.
 
 **Key steps**:
-1. Setup: Quarto, R (with renv restore), Julia 1.12, LaTeX (texlive packages)
+1. Setup: Quarto, R (with automatic renv caching), Julia 1.12 (with package caching), LaTeX (texlive packages including bibtex-extra)
 2. Render: `quarto render paper/index.qmd`
 3. Upload artifacts: PDF at `paper/*.pdf` (fails if missing)
+
+**Performance**: R package caching via `r-lib/actions/setup-renv@v2` significantly speeds up builds (typically 5-10x faster after first run). Julia packages are also cached via `julia-actions/cache@v1`.
 
 The workflow also uploads both PDF and TEX files to the `rendered-paper` artifact (30-day retention) for main branch pushes.
 
