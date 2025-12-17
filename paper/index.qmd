@@ -1,5 +1,11 @@
 ---
 title: "Your Paper Title Here"
+format:
+  pdf:
+    include-in-header:
+      text: |
+        \usepackage{lineno}
+        \linenumbers
 author:
   - name: Your Name
     affiliation: Your Institution
