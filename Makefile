@@ -23,8 +23,8 @@ help:
 # Clean - remove generated files and caches
 clean:
 	@echo "Cleaning generated files..."
-	rm -rf _output/
 	rm -rf .quarto/
+	rm -f paper/*.pdf paper/*.tex
 
 # ============================================================================
 # Add your custom recipes below this line

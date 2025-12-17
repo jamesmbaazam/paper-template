@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: paper-pdf
-          path: _output/**/*.pdf
+          path: paper/*.pdf
           if-no-files-found: error
 
       - name: Upload rendered paper
@@ -78,5 +78,6 @@ jobs:
         with:
           name: rendered-paper
           path: |
-            _output/
+            paper/*.pdf
+            paper/*.tex
           retention-days: 30
