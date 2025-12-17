@@ -19,16 +19,6 @@ repos:
       - id: no-browser-statement
       - id: no-debug-statement
 
-  # Julia formatting (requires JuliaFormatter.jl)
-  - repo: local
-    hooks:
-      - id: julia-format
-        name: julia-format
-        entry: julia --project=. -e 'using JuliaFormatter; format(".")'
-        language: system
-        files: '\.jl$'
-        pass_filenames: false
-
   # Spell checking
   - repo: https://github.com/codespell-project/codespell
     rev: v2.2.6
