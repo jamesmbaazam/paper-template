@@ -1,6 +1,22 @@
 # .Rprofile for paper-template
 # This file is run when R starts up
 
+# Check R version for reproducibility
+if (file.exists(".Rversion")) {
+  required_version <- trimws(readLines(".Rversion", n = 1))
+  current_version <- paste(R.version$major, R.version$minor, sep = ".")
+
+  if (current_version != required_version) {
+    warning(
+      sprintf(
+        "R version mismatch!\n  Required: %s\n  Current:  %s\n  This may affect reproducibility.",
+        required_version, current_version
+      ),
+      immediate. = TRUE
+    )
+  }
+}
+
 # Activate renv for dependency management (if initialized)
 if (file.exists("renv/activate.R")) {
   source("renv/activate.R")

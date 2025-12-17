@@ -1,0 +1,34 @@
+# Git
+.git/
+.gitignore
+
+# Output and cache
+paper/*.pdf
+paper/*.tex
+.quarto/
+_freeze/
+*_files/
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+*.Rproj
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+.claude/
+
+# Documentation (not needed in container)
+README.md
+CLAUDE.md
+LICENSE
+
+# CI/CD
+.github/
+.pre-commit-config.yaml.example

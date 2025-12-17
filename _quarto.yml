@@ -48,7 +48,3 @@ knitr:
     fig.height: 5
     dpi: 300
     dev: "png"
-
-julia:
-  daemon: false
-  exeflags: ["--project=@.", "--threads=auto"]

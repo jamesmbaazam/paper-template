@@ -1,17 +1,16 @@
 # Academic Paper Template
 
-A comprehensive template repository for reproducible research using R and Julia with Quarto for paper writing. This template provides a structured workflow for data analysis, statistical modeling, and academic paper preparation with version control.
+A focused, user-friendly template for reproducible research using R with Quarto. This template provides a clean starting point for academic papers with strong reproducibility guarantees through R version pinning, dependency locking, and automated workflows.
 
 ## Features
 
-- Unified project structure supporting both R and Julia
-- Academic paper writing with Quarto rendered to PDF via LaTeX
-- Dependency management with `renv` (R) and `Project.toml` (Julia)
-- Automated build system using GNU Make
-- Pre-commit hooks for code formatting and quality checks
-- CI/CD workflows with GitHub Actions
-- Spell checking with custom dictionary support
-- Example paper structure with proper citations and cross-references
+- **Simple & Focused**: R-only template (no multi-language complexity)
+- **Reproducible**: R version pinning (`.Rversion`) + dependency locking (`renv`)
+- **Well-documented**: Includes reproducibility guide and data documentation templates
+- **CI/CD Ready**: Automated rendering with package caching (5-10x speedup)
+- **Optional Extras**: Pre-commit hooks, Docker support, spell checking
+- **Generic Template**: ~100 line starter (vs 435+ line PLOS example)
+- **sessionInfo() Included**: Automatic computational environment documentation
 
 ## Directory Structure
 
@@ -40,34 +39,53 @@ paper-template/
 └── README.md            # This file
 ```
 
+## Do You Need This Template?
+
+### ✅ Use This Template If:
+- Writing an academic paper with R code/analysis
+- Need version control and reproducibility
+- Want automated PDF rendering
+- Working with collaborators
+
+### ❌ Don't Use This If:
+- Simple report (use basic Quarto project)
+- No R code needed (use LaTeX or Markdown directly)
+- Just exploring R (too much infrastructure)
+
+### Alternatives:
+- **Journal-specific formats**: [quarto-journals](https://github.com/quarto-journals/)
+- **R package for articles**: [rticles](https://github.com/rstudio/rticles)
+- **Simple Quarto project**: `quarto create project default my-paper`
+
 ## Prerequisites
 
-### Required Software
+### Required (Core Functionality)
 
-- [R](https://www.r-project.org/) (≥ 4.0.0)
-- [Julia](https://julialang.org/) (≥ 1.9)
+- [R](https://www.r-project.org/) 4.5.1 (or version in `.Rversion`)
 - [Quarto](https://quarto.org/) (latest version)
-- [LaTeX](https://www.latex-project.org/) (for PDF rendering)
-- [GNU Make](https://www.gnu.org/software/make/)
+- [LaTeX](https://www.latex-project.org/) (TeXLive or MacTeX)
 
-### Optional Tools
+### Optional (Enhanced Features)
 
-- [pre-commit](https://pre-commit.com/) - for automated code quality checks
-- [aspell](http://aspell.net/) - for spell checking
+- [GNU Make](https://www.gnu.org/software/make/) - build automation
+- [Docker](https://www.docker.com/) - containerized reproducibility
+- [pre-commit](https://pre-commit.com/) - code quality hooks (copy from `.example`)
+- [aspell](http://aspell.net/) - spell checking (CI only)
 
 ### Installation Commands
 
 **macOS (using Homebrew):**
 
 ```bash
-brew install r julia quarto make aspell
+brew install r quarto
+brew install --cask mactex  # LaTeX distribution
 ```
 
 **Ubuntu/Debian:**
 
 ```bash
 sudo apt-get update
-sudo apt-get install r-base julia quarto-cli texlive-full make aspell
+sudo apt-get install r-base quarto-cli texlive-full
 ```
 
 ## Getting Started
@@ -81,31 +99,38 @@ git clone https://github.com/yourusername/paper-template.git my-research-paper
 cd my-research-paper
 ```
 
-### 2. Install Dependencies
-
-**R dependencies:**
+### 2. Install R Dependencies
 
 ```bash
 Rscript -e "install.packages('renv')"
 Rscript -e "renv::restore()"
 ```
 
-**Julia dependencies:**
-
-```bash
-julia --project=. -e 'using Pkg; Pkg.instantiate()'
-```
-
-### 3. Set Up Pre-commit Hooks (Optional)
-
-```bash
-pip install pre-commit
-pre-commit install
-```
-
-### 4. Start Writing
+### 3. Start Writing
 
 Edit `paper/index.qmd` to write your paper. The template includes example sections, code chunks, and citations to guide you.
+
+## Quick Start (5 Minutes)
+
+For the impatient:
+
+```bash
+# Clone and setup
+git clone https://github.com/yourusername/paper-template.git my-paper
+cd my-paper
+
+# Install R packages
+Rscript -e "install.packages('renv'); renv::restore()"
+
+# Render paper
+quarto render paper/index.qmd
+
+# View output
+open paper/index.pdf  # macOS
+# or xdg-open paper/index.pdf  # Linux
+```
+
+Done! Your PDF is in `paper/index.pdf`.
 
 ## Documentation
 
@@ -175,17 +200,6 @@ renv::snapshot()
 renv::restore()
 ```
 
-**Julia dependencies:**
-
-```bash
-# Add a package
-julia --project=. -e 'using Pkg; Pkg.add("PackageName")'
-
-# Update Manifest.toml
-julia --project=. -e 'using Pkg; Pkg.update()'
-```
-
-**Important:** `Project.toml` is configured as a Julia **project environment** (not a package). It should only contain `[deps]` and `[compat]` sections. Do not add package metadata like `name`, `uuid`, `authors`, or `version` fields.
 
 ### Using Make (Optional)
 
@@ -255,17 +269,62 @@ Automatically renders the paper when you push changes to:
 - Analysis scripts (`scripts/`)
 - Data files (`data/`)
 - Configuration (`_quarto.yml`)
-- Dependencies (`renv.lock`, `Project.toml`, `.Rprofile`)
+- Dependencies (`renv.lock`, `.Rprofile`)
 
 **Performance optimizations:**
 - R package caching via `r-lib/actions/setup-renv@v2` (5-10x speedup after first run)
-- Julia package caching via `julia-actions/cache@v1`
+- R version pinning (4.5.1) for reproducibility
 - Complete LaTeX support including `texlive-bibtex-extra` for bibliographies
 
 Rendered PDFs are available as artifacts in GitHub Actions. The workflow typically takes 2-3 minutes after caching is established (vs. 10-20 minutes without caching).
 
 ### checks.yml
 Runs spell checking with aspell using the custom dictionary in `paper/.wordlist.txt`. Generates warnings but doesn't fail the build, with errors saved as artifacts.
+
+## Docker Support (Optional)
+
+For extreme reproducibility, use Docker:
+
+```bash
+# Build image
+docker build -t my-paper .
+
+# Render paper in container
+docker run --rm -v $(pwd):/project my-paper
+
+# Or run interactively
+docker run --rm -it -v $(pwd):/project my-paper bash
+```
+
+The Docker image guarantees:
+- Exact R version (4.5.1)
+- Exact system dependencies
+- Consistent LaTeX environment
+- Same results across all systems
+
+See `Dockerfile` for details.
+
+## Reproducibility
+
+This template emphasizes computational reproducibility:
+
+- **R Version Pinning**: `.Rversion` file + automatic checking in `.Rprofile`
+- **Package Locking**: `renv.lock` with exact versions
+- **sessionInfo()**: Automatically included in paper appendix
+- **Data Documentation**: Template in `data/README.md`
+- **Best Practices Guide**: See `REPRODUCIBILITY.md` for detailed guidance
+
+**Quick reproducibility check:**
+```bash
+# Verify R version matches
+cat .Rversion
+
+# Check package synchronization
+Rscript -e "renv::status()"
+
+# Test clean render
+make clean && quarto render paper/index.qmd
+```
 
 ## Contributing
 
