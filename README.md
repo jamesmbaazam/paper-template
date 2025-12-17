@@ -20,21 +20,23 @@ paper-template/
 ├── .github/workflows/    # CI/CD pipelines
 ├── data/
 │   ├── raw/             # Original, immutable data
-│   └── processed/       # Cleaned and processed data
+│   └── processed/       # Cleaned and processed data (gitignored)
 ├── scripts/
 │   ├── R/               # R analysis scripts
 │   └── julia/           # Julia analysis scripts
 ├── output/
-│   ├── figures/         # Generated figures
-│   └── tables/          # Generated tables
+│   ├── figures/         # Generated figures (gitignored)
+│   └── tables/          # Generated tables (gitignored)
 ├── paper/
 │   ├── index.qmd        # Main paper document
+│   ├── index.pdf        # Rendered PDF (gitignored)
 │   ├── references.bib   # Bibliography
 │   └── .wordlist.txt    # Custom spelling dictionary
 ├── _quarto.yml          # Quarto configuration
-├── Project.toml         # Julia dependencies
-├── renv.lock            # R dependencies
+├── Project.toml         # Julia project dependencies
+├── renv.lock            # R dependencies lockfile
 ├── Makefile             # Build automation
+├── CLAUDE.md            # AI assistant guidance
 └── README.md            # This file
 ```
 
@@ -105,6 +107,17 @@ pre-commit install
 
 Edit `paper/index.qmd` to write your paper. The template includes example sections, code chunks, and citations to guide you.
 
+## Documentation
+
+This repository includes `CLAUDE.md`, which provides comprehensive guidance for AI assistants (like Claude Code) working with this codebase. It contains:
+- High-level architecture and data flow
+- Common development commands
+- Configuration details and conventions
+- CI/CD workflow patterns
+- Important non-obvious implementation details
+
+Human developers may also find this useful for understanding the project structure and workflows.
+
 ## Usage
 
 ### Building the Paper
@@ -115,7 +128,7 @@ Render the paper to PDF:
 quarto render paper/index.qmd
 ```
 
-The rendered PDF will be in the `_output/` directory.
+The rendered PDF will be `paper/index.pdf` (same directory as the source file).
 
 ### Running Analyses
 
@@ -172,6 +185,8 @@ julia --project=. -e 'using Pkg; Pkg.add("PackageName")'
 julia --project=. -e 'using Pkg; Pkg.update()'
 ```
 
+**Important:** `Project.toml` is configured as a Julia **project environment** (not a package). It should only contain `[deps]` and `[compat]` sections. Do not add package metadata like `name`, `uuid`, `authors`, or `version` fields.
+
 ### Using Make (Optional)
 
 The template includes a basic Makefile with examples. Customize it for your workflow:
@@ -179,7 +194,7 @@ The template includes a basic Makefile with examples. Customize it for your work
 ```bash
 make        # Show available targets
 make help   # Show detailed help
-make clean  # Remove generated files
+make clean  # Remove generated files (.quarto/, paper/*.pdf, paper/*.tex)
 ```
 
 See the Makefile for example recipes you can uncomment or customize.
@@ -234,10 +249,23 @@ Edit the `include-in-header` section in `_quarto.yml`.
 
 This template includes GitHub Actions workflows:
 
-- **render.yml**: Automatically renders the paper on push
-- **checks.yml**: Runs pre-commit checks and spell checking
+### render.yml
+Automatically renders the paper when you push changes to:
+- Paper content (`paper/`)
+- Analysis scripts (`scripts/`)
+- Data files (`data/`)
+- Configuration (`_quarto.yml`)
+- Dependencies (`renv.lock`, `Project.toml`, `.Rprofile`)
 
-Rendered PDFs are available as artifacts in GitHub Actions.
+**Performance optimizations:**
+- R package caching via `r-lib/actions/setup-renv@v2` (5-10x speedup after first run)
+- Julia package caching via `julia-actions/cache@v1`
+- Complete LaTeX support including `texlive-bibtex-extra` for bibliographies
+
+Rendered PDFs are available as artifacts in GitHub Actions. The workflow typically takes 2-3 minutes after caching is established (vs. 10-20 minutes without caching).
+
+### checks.yml
+Runs spell checking with aspell using the custom dictionary in `paper/.wordlist.txt`. Generates warnings but doesn't fail the build, with errors saved as artifacts.
 
 ## Contributing
 
