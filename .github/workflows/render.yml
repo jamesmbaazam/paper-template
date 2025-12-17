@@ -52,7 +52,8 @@ jobs:
             texlive-fonts-recommended \
             texlive-fonts-extra \
             texlive-bibtex-extra \
-            texlive-xetex
+            texlive-xetex \
+            lmodern
 
       - name: Render Quarto document
         run: |
