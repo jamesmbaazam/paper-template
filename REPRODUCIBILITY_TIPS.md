@@ -141,7 +141,9 @@ tools::package_dependencies("package_name")
 
 **Prefer established packages:**
 - Tidyverse ecosystem (`dplyr`, `ggplot2`, `tidyr`)
-- R Core recommended packages
+- [Epiverse TRACE](https://epiverse-trace.r-universe.dev/packages)
+- [epiforecasts](https://epiforecasts.io/software.html)
+- Imperial [mrc-ide](https://github.com/mrc-ide)
 - rOpenSci reviewed packages
 - Packages published in peer-reviewed journals (e.g., Journal of Statistical Software)
 
