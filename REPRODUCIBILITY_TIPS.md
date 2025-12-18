@@ -81,6 +81,133 @@ shasum -a 256 -c data/raw/checksums.txt
 - Save processed data to `data/processed/`
 - Document all processing steps in scripts
 
+## Function Documentation
+
+### Use Roxygen2 for R Functions
+
+If you write custom R functions, document them using Roxygen2 syntax:
+
+```r
+#' Calculate summary statistics for a numeric vector
+#'
+#' @param x A numeric vector
+#' @param na.rm Logical; should missing values be removed? Default is TRUE
+#' @return A named vector with mean, median, and standard deviation
+#' @examples
+#' calculate_stats(c(1, 2, 3, 4, 5))
+#' @export
+calculate_stats <- function(x, na.rm = TRUE) {
+  c(
+    mean = mean(x, na.rm = na.rm),
+    median = median(x, na.rm = na.rm),
+    sd = sd(x, na.rm = na.rm)
+  )
+}
+```
+
+**Benefits:**
+- Clear parameter descriptions
+- Usage examples included
+- Easy to generate documentation with `roxygen2::roxygenise()`
+- Helps others (and future you) understand your code
+
+## Package Selection
+
+### Choose Well-Maintained Packages
+
+When selecting R packages, prioritize:
+
+**Indicators of good maintenance:**
+- Regular updates (check CRAN submission dates)
+- Active GitHub repository with recent commits
+- Responsive maintainers (check issue tracker)
+- Good documentation and vignettes
+- Large user base (downloads, GitHub stars)
+- Reverse dependencies (other packages use it)
+
+**Check package health:**
+```r
+# Check when package was last updated
+packageDescription("package_name")$Date
+
+# View package dependencies
+tools::package_dependencies("package_name")
+```
+
+**Prefer established packages:**
+- Tidyverse ecosystem (`dplyr`, `ggplot2`, `tidyr`)
+- R Core recommended packages
+- rOpenSci reviewed packages
+- Packages published in peer-reviewed journals (e.g., Journal of Statistical Software)
+
+## Workflow Orchestration
+
+### Use Build Tools for Complex Analyses
+
+For multi-step analyses, use orchestration tools to manage dependencies:
+
+#### GNU Make
+
+Create a `Makefile` to define analysis pipeline:
+
+```makefile
+# Makefile
+all: paper/index.pdf
+
+# Data processing
+data/processed/clean_data.rds: data/raw/data.csv scripts/R/01_clean.R
+	Rscript scripts/R/01_clean.R
+
+# Generate figures
+output/figures/plot1.png: data/processed/clean_data.rds scripts/R/02_visualize.R
+	Rscript scripts/R/02_visualize.R
+
+# Render paper
+paper/index.pdf: output/figures/plot1.png paper/index.qmd
+	quarto render paper/index.qmd
+
+clean:
+	rm -rf output/* data/processed/* paper/index.pdf
+```
+
+**Benefits:** Only reruns changed components, shell-independent
+
+#### targets Package
+
+For R-native workflow management:
+
+```r
+# _targets.R
+library(targets)
+
+list(
+  tar_target(raw_data, read.csv("data/raw/data.csv")),
+  tar_target(clean_data, process_data(raw_data)),
+  tar_target(model, fit_model(clean_data)),
+  tar_target(plot, create_plot(model)),
+  tar_target(report, quarto::quarto_render("paper/index.qmd"))
+)
+```
+
+**Run pipeline:**
+```r
+targets::tar_make()  # Run entire pipeline
+targets::tar_visnetwork()  # Visualize dependencies
+```
+
+**Benefits:** R-native, automatic dependency tracking, parallel execution, caching
+
+### Choosing an Orchestration Tool
+
+| Tool | Best For | Learning Curve |
+|------|----------|----------------|
+| **Quarto freeze** | Single-document analyses | Low |
+| **GNU make** | Multi-language pipelines | Medium |
+| **targets** | Complex R workflows | Medium-High |
+| **Snakemake** | Bioinformatics pipelines | High |
+
+**This template uses Quarto's `freeze: auto`** which caches chunk execution—sufficient for many analyses.
+
 ## Computational Environment
 
 ### Document Your Environment
@@ -187,7 +314,25 @@ Before sharing or publishing:
 
 ## Further Reading
 
-- [The Turing Way: Guide for Reproducible Research](https://the-turing-way.netlify.app/reproducible-research/reproducible-research.html)
-- [renv Documentation](https://rstudio.github.io/renv/)
-- [Reproducibility in Science](https://www.nature.com/articles/533452a)
-- [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285)
+### Comprehensive Guides
+- [The Turing Way: Guide for Reproducible Research](https://the-turing-way.netlify.app/reproducible-research/reproducible-research.html) - Community handbook for reproducible data science
+- [renv Documentation](https://rstudio.github.io/renv/) - R package dependency management
+- [targets Manual](https://books.ropensci.org/targets/) - Function-oriented Make-like workflow management for R
+
+### "Ten Simple Rules" Papers (PLOS Computational Biology)
+- [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285) (Sandve et al., 2013)
+- [Ten Simple Rules for Writing and Sharing Computational Analyses in Jupyter Notebooks](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007007) (Rule et al., 2019)
+- [Ten Simple Rules for Taking Advantage of Git and GitHub](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004947) (Perez-Riverol et al., 2016)
+- [Ten Simple Rules for Documenting Scientific Software](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006561) (Lee, 2018)
+- [Ten Simple Rules for Making Research Software More Robust](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005412) (Taschuk & Wilson, 2017)
+- [Ten Simple Rules for Quick and Dirty Scientific Programming](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008549) (List et al., 2021)
+
+### Research Papers & Reports
+- [Reproducibility in Science](https://www.nature.com/articles/533452a) (Nature Editorial, 2016)
+- [Good Enough Practices in Scientific Computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510) (Wilson et al., 2017)
+- [Best Practices for Scientific Computing](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745) (Wilson et al., 2014)
+
+### R-Specific Resources
+- [R Packages (2nd ed.)](https://r-pkgs.org/) - Hadley Wickham & Jenny Bryan (includes Roxygen2 documentation)
+- [What They Forgot to Teach You About R](https://rstats.wtf/) - Workflow and project management tips
+- [rOpenSci Packages Guide](https://devguide.ropensci.org/) - Standards for R package development
