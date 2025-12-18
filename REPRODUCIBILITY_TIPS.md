@@ -129,7 +129,7 @@ When selecting R packages, prioritize:
 
 ```r
 # Check when package was last updated
-packageDescription("package_name")$Date
+utils::packageDate("package_name")
 
 # View package dependencies
 tools::package_dependencies("package_name")
