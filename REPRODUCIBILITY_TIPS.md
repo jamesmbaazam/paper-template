@@ -317,11 +317,13 @@ Before sharing or publishing:
 ## Further Reading
 
 ### Comprehensive Guides
+
 - [The Turing Way: Guide for Reproducible Research](https://the-turing-way.netlify.app/reproducible-research/reproducible-research.html) - Community handbook for reproducible data science
 - [renv Documentation](https://rstudio.github.io/renv/) - R package dependency management
 - [targets Manual](https://books.ropensci.org/targets/) - Function-oriented Make-like workflow management for R
 
 ### "Ten Simple Rules" Papers (PLOS Computational Biology)
+
 - [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285) (Sandve et al., 2013)
 - [Ten Simple Rules for Writing and Sharing Computational Analyses in Jupyter Notebooks](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007007) (Rule et al., 2019)
 - [Ten Simple Rules for Taking Advantage of Git and GitHub](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004947) (Perez-Riverol et al., 2016)
@@ -330,11 +332,13 @@ Before sharing or publishing:
 - [Ten Simple Rules for Quick and Dirty Scientific Programming](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008549) (List et al., 2021)
 
 ### Research Papers & Reports
+
 - [Reproducibility in Science](https://www.nature.com/articles/533452a) (Nature Editorial, 2016)
 - [Good Enough Practices in Scientific Computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510) (Wilson et al., 2017)
 - [Best Practices for Scientific Computing](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745) (Wilson et al., 2014)
 
 ### R-Specific Resources
+
 - [R Packages (2nd ed.)](https://r-pkgs.org/) - Hadley Wickham & Jenny Bryan (includes Roxygen2 documentation)
 - [What They Forgot to Teach You About R](https://rstats.wtf/) - Workflow and project management tips
 - [rOpenSci Packages Guide](https://devguide.ropensci.org/) - Standards for R package development
