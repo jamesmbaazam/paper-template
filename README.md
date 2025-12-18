@@ -150,7 +150,7 @@ This project follows reproducibility best practices:
 - **Computational Environment**: Full session info included in paper appendix
 - **Data Provenance**: All data sources documented in `data/README.md`
 
-For detailed reproducibility guidelines, see [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
+For detailed reproducibility guidelines, see [`REPRODUCIBILITY_TIPS.md`](REPRODUCIBILITY_TIPS.md).
 
 ## Citation
 
