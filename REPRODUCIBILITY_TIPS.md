@@ -181,14 +181,19 @@ For R-native workflow management:
 # _targets.R
 library(targets)
 
+# Source your analysis functions
+source("scripts/R/01_clean.R")
+source("scripts/R/02_visualize.R")
+
 list(
   tar_target(raw_data, read.csv("data/raw/data.csv")),
-  tar_target(clean_data, process_data(raw_data)),
-  tar_target(model, fit_model(clean_data)),
-  tar_target(plot, create_plot(model)),
+  tar_target(clean_data, clean_dataset(raw_data)),
+  tar_target(plot1, create_visualization(clean_data, "output/figures/plot1.png")),
   tar_target(report, quarto::quarto_render("paper/index.qmd"))
 )
 ```
+
+**Note:** Replace `clean_dataset()` and `create_visualization()` with your actual analysis functions defined in your R scripts.
 
 **Run pipeline:**
 
