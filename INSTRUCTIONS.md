@@ -10,7 +10,7 @@ A focused, user-friendly template for reproducible research using R with Quarto.
 - **Reproducible**: R version pinning (`.Rversion`) + dependency locking (`renv`)
 - **Well-documented**: Includes reproducibility guide and data documentation templates
 - **CI/CD Ready**: Automated rendering with package caching (5-10x speedup)
-- **Optional Extras**: Pre-commit hooks, Docker support, spell checking
+- **Optional Extras**: Docker support, spell checking
 - **Generic Template**: ~100 line starter (vs 435+ line PLOS example)
 - **sessionInfo() Included**: Automatic computational environment documentation
 
@@ -23,8 +23,7 @@ paper-template/
 │   ├── raw/             # Original, immutable data
 │   └── processed/       # Cleaned and processed data (gitignored)
 ├── scripts/
-│   ├── R/               # R analysis scripts
-│   └── julia/           # Julia analysis scripts
+│   └── R/               # R analysis scripts
 ├── output/
 │   ├── figures/         # Generated figures (gitignored)
 │   └── tables/          # Generated tables (gitignored)
@@ -34,11 +33,11 @@ paper-template/
 │   ├── references.bib   # Bibliography
 │   └── .wordlist.txt    # Custom spelling dictionary
 ├── _quarto.yml          # Quarto configuration
-├── Project.toml         # Julia project dependencies
 ├── renv.lock            # R dependencies lockfile
 ├── Makefile             # Build automation
 ├── CLAUDE.md            # AI assistant guidance
-└── README.md            # This file
+├── INSTRUCTIONS.md      # This file
+└── README.md            # Research project documentation
 ```
 
 ## Do You Need This Template?
@@ -71,7 +70,6 @@ paper-template/
 
 - [GNU Make](https://www.gnu.org/software/make/) - build automation
 - [Docker](https://www.docker.com/) - containerized reproducibility
-- [pre-commit](https://pre-commit.com/) - code quality hooks (copy from `.example`)
 - [aspell](http://aspell.net/) - spell checking (CI only)
 
 ### Installation Commands
@@ -137,6 +135,7 @@ Done! Your PDF is in `paper/index.pdf`.
 ## Documentation
 
 This repository includes `CLAUDE.md`, which provides comprehensive guidance for AI assistants (like Claude Code) working with this codebase. It contains:
+
 - High-level architecture and data flow
 - Common development commands
 - Configuration details and conventions
@@ -160,12 +159,12 @@ The rendered PDF will be `paper/index.pdf` (same directory as the source file).
 ### Running Analyses
 
 1. Place raw data in `data/raw/`
-2. Create analysis scripts in `scripts/R/` or `scripts/julia/`
+2. Create analysis scripts in `scripts/R/`
 3. Save processed data to `data/processed/`
 4. Save figures to `output/figures/`
 5. Save tables to `output/tables/`
 
-### Using R and Julia Code in Quarto
+### Using R Code in Quarto
 
 **R code chunk:**
 
@@ -175,16 +174,6 @@ The rendered PDF will be `paper/index.pdf` (same directory as the source file).
 
 library(ggplot2)
 ggplot(data, aes(x, y)) + geom_point()
-```
-
-**Julia code chunk:**
-
-```julia
-#| label: fig-example-julia
-#| fig-cap: "Julia figure"
-
-using Plots
-plot(x, y)
 ```
 
 ### Managing Dependencies
@@ -201,7 +190,6 @@ renv::snapshot()
 # Restore packages
 renv::restore()
 ```
-
 
 ### Using Make (Optional)
 
@@ -267,6 +255,7 @@ This template includes GitHub Actions workflows:
 
 ### render.yml
 Automatically renders the paper when you push changes to:
+
 - Paper content (`paper/`)
 - Analysis scripts (`scripts/`)
 - Data files (`data/`)
@@ -274,9 +263,10 @@ Automatically renders the paper when you push changes to:
 - Dependencies (`renv.lock`, `.Rprofile`)
 
 **Performance optimizations:**
+
 - R package caching via `r-lib/actions/setup-renv@v2` (5-10x speedup after first run)
 - R version pinning (4.5.1) for reproducibility
-- Complete LaTeX support including `texlive-bibtex-extra` for bibliographies
+- Complete LaTeX support including `texlive-luatex` for font rendering
 
 Rendered PDFs are available as artifacts in GitHub Actions. The workflow typically takes 2-3 minutes after caching is established (vs. 10-20 minutes without caching).
 
@@ -299,6 +289,7 @@ docker run --rm -it -v $(pwd):/project my-paper bash
 ```
 
 The Docker image guarantees:
+
 - Exact R version (4.5.1)
 - Exact system dependencies
 - Consistent LaTeX environment
@@ -334,9 +325,8 @@ When using this template:
 
 1. Create a new branch for your work
 2. Make your changes
-3. Pre-commit hooks will automatically format your code
-4. Push and create a pull request
-5. CI/CD will render the paper and run checks
+3. Push and create a pull request
+4. CI/CD will render the paper and run checks
 
 ## License
 
@@ -361,14 +351,6 @@ Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
 Rscript -e "renv::restore()"
 ```
 
-### Julia packages not found
-
-Instantiate the Julia environment:
-
-```bash
-julia --project=. -e 'using Pkg; Pkg.instantiate()'
-```
-
 ### LaTeX errors
 
 Install the full TeXLive distribution:
@@ -380,9 +362,8 @@ Install the full TeXLive distribution:
 
 - [Quarto Documentation](https://quarto.org/docs/guide/)
 - [R for Data Science](https://r4ds.had.co.nz/)
-- [Julia Documentation](https://docs.julialang.org/)
 - [BibTeX Guide](http://www.bibtex.org/Using/)
-- [Pre-commit Hooks](https://pre-commit.com/)
+- [renv Documentation](https://rstudio.github.io/renv/)
 
 ## Citation
 
