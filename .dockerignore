@@ -31,4 +31,3 @@ LICENSE
 
 # CI/CD
 .github/
-.pre-commit-config.yaml.example
