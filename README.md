@@ -26,7 +26,7 @@
 - Quarto (latest version)
 - LaTeX distribution (TeXLive or MacTeX)
 
-**For detailed installation instructions, see [`INSTRUCTIONS.md`](INSTRUCTIONS.md).**
+**For detailed installation instructions, see [`TEMPLATE_GUIDE.md`](TEMPLATE_GUIDE.md).**
 
 ## Reproducing the Analysis
 
