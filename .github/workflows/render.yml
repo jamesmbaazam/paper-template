@@ -54,6 +54,7 @@ jobs:
             texlive-fonts-extra \
             texlive-bibtex-extra \
             texlive-xetex \
+            texlive-luatex \
             lmodern
 
       - name: Render Quarto document
