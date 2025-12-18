@@ -73,7 +73,7 @@ The rendered PDF will be available at `paper/index.pdf`.
 
 ### Automated Builds
 
-The GitHub Actions render workflow automatically generates the paper on every push to `main`. The latest rendered PDF is available as an artifact in the [Actions tab](../../actions) and stored in the `paper/` directory.
+The GitHub Actions render workflow automatically generates the paper on every push to `main`. The latest rendered PDF is stored in `paper/index.pdf`.
 
 ## Key Figures
 
@@ -126,7 +126,7 @@ All figures are automatically saved to `output/figures/` when you run the analys
 └── README.md             # This file
 ```
 
-For complete template documentation, see [`INSTRUCTIONS.md`](INSTRUCTIONS.md).
+For complete template documentation, see [`TEMPLATE_GUIDE.md`](TEMPLATE_GUIDE.md).
 
 ## Data
 
