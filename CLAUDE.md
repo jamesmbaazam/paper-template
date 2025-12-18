@@ -23,12 +23,6 @@ In R: `renv::snapshot()` to update renv.lock after adding packages.
 ### R Version
 R version is pinned in `.Rversion` (currently 4.5.1). `.Rprofile` checks version on startup and warns if mismatched.
 
-### Pre-commit Hooks (Optional)
-```bash
-cp .pre-commit-config.yaml.example .pre-commit-config.yaml
-pre-commit install
-```
-
 ## Architecture
 
 **Data Flow**: `data/raw/` (immutable) → `scripts/R/` → `output/figures|tables/` → `paper/index.qmd` → `paper/index.pdf`
@@ -70,7 +64,6 @@ pre-commit install
 ## Important Notes
 
 - **R version**: Must match `.Rversion` for reproducibility
-- **Pre-commit**: Optional, copy from `.example` to enable
 - **PDF location**: `paper/index.pdf` (gitignored)
 - **Figures**: Auto-saved to `output/figures/` via knitr settings
 - **LaTeX**: Kept in `paper/` for debugging (`keep-tex: true`)
