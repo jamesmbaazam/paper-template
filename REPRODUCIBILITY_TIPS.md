@@ -11,6 +11,7 @@ This template uses `.Rversion` to pin the R version for reproducibility.
 **What happens:** When you start R in this project, `.Rprofile` automatically checks if your R version matches the required version and warns you if there's a mismatch.
 
 **To update the R version requirement:**
+
 ```bash
 R --version | head -n 1 | awk '{print $3}' > .Rversion
 ```
@@ -20,6 +21,7 @@ R --version | head -n 1 | awk '{print $3}' > .Rversion
 This template uses `renv` for R package management.
 
 **Lock your dependencies:**
+
 ```r
 # After installing new packages
 renv::snapshot()
@@ -29,6 +31,7 @@ renv::restore()
 ```
 
 **Check synchronization status:**
+
 ```r
 renv::status()
 ```
@@ -45,6 +48,7 @@ set.seed(12345)  # Use a consistent seed for your project
 ```
 
 **For parallel processing:**
+
 ```r
 # Use L'Ecuyer-CMRG for parallel-safe RNG
 library(parallel)
