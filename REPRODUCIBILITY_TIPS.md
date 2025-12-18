@@ -193,7 +193,7 @@ list(
 )
 ```
 
-**Note:** Replace `clean_dataset()` and `create_visualization()` with your actual analysis functions defined in your R scripts. When using `format = "file"`, functions should return the file path they create.
+**Note:** Replace `clean_dataset()` and `create_visualization()` with your actual analysis functions defined in your R scripts. When using `format = "file"`, your function should save the file and return its path (e.g., `create_visualization <- function(data, path) { ggsave(path, plot); return(path) }`).
 
 **Run pipeline:**
 
