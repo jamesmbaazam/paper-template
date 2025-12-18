@@ -87,6 +87,6 @@ See `REPRODUCIBILITY.md` for:
 ## Documentation
 
 - `README.md` - Research project documentation (users fill this out for their specific analysis)
-- `TEMPLATE.md` - Template setup guide with installation and usage instructions
+- `INSTRUCTIONS.md` - Template setup guide with installation and usage instructions
 - `REPRODUCIBILITY.md` - Reproducibility best practices
 - `data/README.md` - Data documentation template

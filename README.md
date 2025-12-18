@@ -26,7 +26,7 @@
 - Quarto (latest version)
 - LaTeX distribution (TeXLive or MacTeX)
 
-**For detailed installation instructions, see [`TEMPLATE.md`](TEMPLATE.md).**
+**For detailed installation instructions, see [`INSTRUCTIONS.md`](INSTRUCTIONS.md).**
 
 ## Reproducing the Analysis
 
@@ -126,7 +126,7 @@ All figures are automatically saved to `output/figures/` when you run the analys
 └── README.md             # This file
 ```
 
-For complete template documentation, see [`TEMPLATE.md`](TEMPLATE.md).
+For complete template documentation, see [`INSTRUCTIONS.md`](INSTRUCTIONS.md).
 
 ## Data
 
@@ -202,4 +202,4 @@ For questions or comments, please contact [Lead Author Name] at [email@instituti
 
 ---
 
-**Template Information**: This project uses the [Academic Paper Template](TEMPLATE.md). For template setup and customization, see [`TEMPLATE.md`](TEMPLATE.md).
+**Template Information**: This project uses the [Academic Paper Template](INSTRUCTIONS.md). For template setup and customization, see [`INSTRUCTIONS.md`](INSTRUCTIONS.md).
