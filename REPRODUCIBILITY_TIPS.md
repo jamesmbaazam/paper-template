@@ -188,12 +188,12 @@ source("scripts/R/02_visualize.R")
 list(
   tar_target(raw_data, read.csv("data/raw/data.csv")),
   tar_target(clean_data, clean_dataset(raw_data)),
-  tar_target(plot1, create_visualization(clean_data), format = "file"),
+  tar_target(plot1, create_visualization(clean_data, "output/figures/plot1.png"), format = "file"),
   tar_target(report, quarto::quarto_render("paper/index.qmd"))
 )
 ```
 
-**Note:** Replace `clean_dataset()` and `create_visualization()` with your actual analysis functions defined in your R scripts.
+**Note:** Replace `clean_dataset()` and `create_visualization()` with your actual analysis functions defined in your R scripts. When using `format = "file"`, functions should return the file path they create.
 
 **Run pipeline:**
 
