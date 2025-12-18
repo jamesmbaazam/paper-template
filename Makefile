@@ -31,15 +31,13 @@ clean:
 # ============================================================================
 
 # Example: Render the paper
-# render:
-# 	quarto render paper/index.qmd
+render:
+	quarto render paper/index.qmd
 
 # Example: Install dependencies
-# install:
-# 	Rscript -e "renv::restore()"
-# 	julia --project=. -e 'using Pkg; Pkg.instantiate()'
+install:
+	Rscript -e "renv::restore()"
 
 # Example: Run analysis scripts
-# analyze:
-# 	Rscript scripts/R/analysis.R
-# 	julia --project=. scripts/julia/analysis.jl
+analyse:
+	Rscript scripts/R/analysis.R
