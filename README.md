@@ -1,396 +1,205 @@
-# Academic Paper Template
+# [Your Paper Title Here]
 
-A focused, user-friendly template for reproducible research using R with Quarto. This template provides a clean starting point for academic papers with strong reproducibility guarantees through R version pinning, dependency locking, and automated workflows.
+<!-- Replace the title above with your paper's actual title -->
 
-## Features
+> **Status:** [Draft | Under Review | Published]
 
-- **Simple & Focused**: R-only template (no multi-language complexity)
-- **Reproducible**: R version pinning (`.Rversion`) + dependency locking (`renv`)
-- **Well-documented**: Includes reproducibility guide and data documentation templates
-- **CI/CD Ready**: Automated rendering with package caching (5-10x speedup)
-- **Optional Extras**: Pre-commit hooks, Docker support, spell checking
-- **Generic Template**: ~100 line starter (vs 435+ line PLOS example)
-- **sessionInfo() Included**: Automatic computational environment documentation
+## Authors
 
-## Directory Structure
+<!-- Replace with your author list. Add or remove authors as needed -->
 
-```text
-paper-template/
-├── .github/workflows/    # CI/CD pipelines
-├── data/
-│   ├── raw/             # Original, immutable data
-│   └── processed/       # Cleaned and processed data (gitignored)
-├── scripts/
-│   ├── R/               # R analysis scripts
-│   └── julia/           # Julia analysis scripts
-├── output/
-│   ├── figures/         # Generated figures (gitignored)
-│   └── tables/          # Generated tables (gitignored)
-├── paper/
-│   ├── index.qmd        # Main paper document
-│   ├── index.pdf        # Rendered PDF (gitignored)
-│   ├── references.bib   # Bibliography
-│   └── .wordlist.txt    # Custom spelling dictionary
-├── _quarto.yml          # Quarto configuration
-├── Project.toml         # Julia project dependencies
-├── renv.lock            # R dependencies lockfile
-├── Makefile             # Build automation
-├── CLAUDE.md            # AI assistant guidance
-└── README.md            # This file
-```
+- **First Author Name** - Institution Name, email@institution.edu
+- **Second Author Name** - Institution Name, email@institution.edu
+- **Third Author Name** - Institution Name, email@institution.edu
 
-## Do You Need This Template?
+## Abstract
 
-### ✅ Use This Template If:
-- Writing an academic paper with R code/analysis
-- Need version control and reproducibility
-- Want automated PDF rendering
-- Working with collaborators
+<!-- Replace with your abstract. Typically 150-300 words summarizing your research question, methods, key findings, and conclusions -->
 
-### ❌ Don't Use This If:
-- Simple report (use basic Quarto project)
-- No R code needed (use LaTeX or Markdown directly)
-- Just exploring R (too much infrastructure)
-
-### Alternatives:
-- **Journal-specific formats**: [quarto-journals](https://github.com/quarto-journals/)
-- **R package for articles**: [rticles](https://github.com/rstudio/rticles)
-- **Simple Quarto project**: `quarto create project default my-paper`
+[Your abstract text here. Summarize: (1) the research problem, (2) your approach/methods, (3) key findings, and (4) main conclusions or implications.]
 
 ## Prerequisites
 
-### Required (Core Functionality)
+<!-- List the main software requirements -->
 
-- [R](https://www.r-project.org/) 4.5.1 (or version in `.Rversion`)
-- [Quarto](https://quarto.org/) (latest version)
-- [LaTeX](https://www.latex-project.org/) (TeXLive or MacTeX)
+- R 4.5.1 (see `.Rversion`)
+- Quarto (latest version)
+- LaTeX distribution (TeXLive or MacTeX)
 
-### Optional (Enhanced Features)
+**For detailed installation instructions, see [`TEMPLATE.md`](TEMPLATE.md).**
 
-- [GNU Make](https://www.gnu.org/software/make/) - build automation
-- [Docker](https://www.docker.com/) - containerized reproducibility
-- [pre-commit](https://pre-commit.com/) - code quality hooks (copy from `.example`)
-- [aspell](http://aspell.net/) - spell checking (CI only)
+## Reproducing the Analysis
 
-### Installation Commands
+<!-- Update these steps to match your actual analysis workflow -->
 
-**macOS (using Homebrew):**
+### 1. Install Dependencies
 
 ```bash
-brew install r quarto
-brew install --cask mactex  # LaTeX distribution
-```
-
-**Ubuntu/Debian:**
-
-```bash
-sudo apt-get update
-sudo apt-get install r-base quarto-cli texlive-full
-```
-
-## Getting Started
-
-### 1. Clone or Use This Template
-
-Click "Use this template" on GitHub or clone directly:
-
-```bash
-git clone https://github.com/yourusername/paper-template.git my-research-paper
-cd my-research-paper
-```
-
-### 2. Install R Dependencies
-
-```bash
-Rscript -e "install.packages('renv')"
-Rscript -e "renv::restore()"
-```
-
-### 3. Start Writing
-
-Edit `paper/index.qmd` to write your paper. The template includes example sections, code chunks, and citations to guide you.
-
-## Quick Start (5 Minutes)
-
-For the impatient:
-
-```bash
-# Clone and setup
-git clone https://github.com/yourusername/paper-template.git my-paper
-cd my-paper
-
-# Install R packages
 Rscript -e "install.packages('renv'); renv::restore()"
-
-# Render paper
-quarto render paper/index.qmd
-
-# View output
-open paper/index.pdf  # macOS
-# or xdg-open paper/index.pdf  # Linux
 ```
 
-Done! Your PDF is in `paper/index.pdf`.
+Alternatively, if using Make:
+```bash
+make install  # If you've uncommented this target in Makefile
+```
 
-## Documentation
+### 2. Run Analysis Scripts
 
-This repository includes `CLAUDE.md`, which provides comprehensive guidance for AI assistants (like Claude Code) working with this codebase. It contains:
-- High-level architecture and data flow
-- Common development commands
-- Configuration details and conventions
-- CI/CD workflow patterns
-- Important non-obvious implementation details
+<!-- Update script names and order to match your workflow -->
 
-Human developers may also find this useful for understanding the project structure and workflows.
+```bash
+Rscript scripts/R/01_data_cleaning.R
+Rscript scripts/R/02_exploratory_analysis.R
+Rscript scripts/R/03_main_analysis.R
+```
 
-## Usage
+Alternatively, if using Make:
+```bash
+make analyze  # If you've uncommented this target in Makefile
+```
 
-### Building the Paper
-
-Render the paper to PDF:
+### 3. Generate the Paper
 
 ```bash
 quarto render paper/index.qmd
 ```
 
-The rendered PDF will be `paper/index.pdf` (same directory as the source file).
-
-### Running Analyses
-
-1. Place raw data in `data/raw/`
-2. Create analysis scripts in `scripts/R/` or `scripts/julia/`
-3. Save processed data to `data/processed/`
-4. Save figures to `output/figures/`
-5. Save tables to `output/tables/`
-
-### Using R and Julia Code in Quarto
-
-**R code chunk:**
-
-```r
-#| label: fig-example
-#| fig-cap: "Example figure"
-
-library(ggplot2)
-ggplot(data, aes(x, y)) + geom_point()
-```
-
-**Julia code chunk:**
-
-```julia
-#| label: fig-example-julia
-#| fig-cap: "Julia figure"
-
-using Plots
-plot(x, y)
-```
-
-### Managing Dependencies
-
-**R dependencies (using renv):**
-
-```r
-# Install a new package
-install.packages("package_name")
-
-# Update renv.lock
-renv::snapshot()
-
-# Restore packages
-renv::restore()
-```
-
-
-### Using Make (Optional)
-
-The template includes a basic Makefile with examples. Customize it for your workflow:
-
+Alternatively, if using Make:
 ```bash
-make        # Show available targets
-make help   # Show detailed help
-make clean  # Remove generated files (.quarto/, paper/*.pdf, paper/*.tex)
+make render  # If you've uncommented this target in Makefile
 ```
 
-See the Makefile for example recipes you can uncomment or customize.
+The rendered PDF will be available at `paper/index.pdf`.
 
-## Bibliography Management
+### Automated Builds
 
-Add references to `paper/references.bib` in BibTeX format:
+The GitHub Actions render workflow automatically generates the paper on every push to `main`. The latest rendered PDF is available as an artifact in the [Actions tab](../../actions) and stored in the `paper/` directory.
 
-```bibtex
-@article{author2024,
-  title = {Article Title},
-  author = {Author, Name},
-  year = {2024},
-  journal = {Journal Name},
-  volume = {1},
-  pages = {1--10}
-}
+## Key Figures
+
+<!-- Update this table with your actual figures -->
+
+| Figure | Script | Description |
+|--------|--------|-------------|
+| Figure 1 | `scripts/R/03_main_analysis.R` | [Brief description of what this figure shows] |
+| Figure 2 | `scripts/R/03_main_analysis.R` | [Brief description of what this figure shows] |
+| Figure 3 | `scripts/R/04_sensitivity_analysis.R` | [Brief description of what this figure shows] |
+
+All figures are automatically saved to `output/figures/` when you run the analysis scripts.
+
+## Results Preview
+
+<!-- Optional: Add links to key results or summary statistics -->
+
+### Main Findings
+
+- **Finding 1**: [Brief description]
+- **Finding 2**: [Brief description]
+- **Finding 3**: [Brief description]
+
+### Key Statistics
+
+<!-- Add your key statistics here, or remove this section if not needed -->
+
+```
+[Example: N = 1,234 observations]
+[Example: Mean effect size = 0.42 (95% CI: 0.35-0.49)]
 ```
 
-Cite in text: `[@author2024]` or `@author2024`
+## Project Structure
 
-## Customization
-
-### Changing Citation Style
-
-Edit `_quarto.yml` to use a different CSL style:
-
-```yaml
-csl: https://www.zotero.org/styles/nature
+```text
+├── data/
+│   ├── raw/              # Original, immutable data
+│   └── processed/        # Cleaned data (generated by scripts)
+├── scripts/
+│   └── R/                # Analysis scripts (run in order)
+├── output/
+│   ├── figures/          # Generated figures (auto-saved)
+│   └── tables/           # Generated tables (auto-saved)
+├── paper/
+│   ├── index.qmd         # Main paper document
+│   ├── references.bib    # Bibliography
+│   └── index.pdf         # Rendered PDF (generated)
+├── renv.lock             # R package versions
+├── _quarto.yml           # Quarto configuration
+└── README.md             # This file
 ```
 
-Browse styles at [Zotero Style Repository](https://www.zotero.org/styles)
+For complete template documentation, see [`TEMPLATE.md`](TEMPLATE.md).
 
-### Changing PDF Formatting
+## Data
 
-Modify the `format.pdf` section in `_quarto.yml`:
+<!-- Briefly describe your data sources. For detailed documentation, see data/README.md -->
 
-```yaml
-format:
-  pdf:
-    documentclass: article
-    fontsize: 12pt
-    geometry:
-      - margin=1.5in
-```
+Data sources and detailed data documentation are available in [`data/README.md`](data/README.md).
 
-### Adding Custom LaTeX Packages
+### Quick Summary
 
-Edit the `include-in-header` section in `_quarto.yml`.
-
-## CI/CD
-
-This template includes GitHub Actions workflows:
-
-### render.yml
-Automatically renders the paper when you push changes to:
-- Paper content (`paper/`)
-- Analysis scripts (`scripts/`)
-- Data files (`data/`)
-- Configuration (`_quarto.yml`)
-- Dependencies (`renv.lock`, `.Rprofile`)
-
-**Performance optimizations:**
-- R package caching via `r-lib/actions/setup-renv@v2` (5-10x speedup after first run)
-- R version pinning (4.5.1) for reproducibility
-- Complete LaTeX support including `texlive-bibtex-extra` for bibliographies
-
-Rendered PDFs are available as artifacts in GitHub Actions. The workflow typically takes 2-3 minutes after caching is established (vs. 10-20 minutes without caching).
-
-### checks.yml
-Runs spell checking with aspell using the custom dictionary in `paper/.wordlist.txt`. Generates warnings but doesn't fail the build, with errors saved as artifacts.
-
-## Docker Support (Optional)
-
-For extreme reproducibility, use Docker:
-
-```bash
-# Build image
-docker build -t my-paper .
-
-# Render paper in container
-docker run --rm -v $(pwd):/project my-paper
-
-# Or run interactively
-docker run --rm -it -v $(pwd):/project my-paper bash
-```
-
-The Docker image guarantees:
-- Exact R version (4.5.1)
-- Exact system dependencies
-- Consistent LaTeX environment
-- Same results across all systems
-
-See `Dockerfile` for details.
+- **Source**: [Data source name/URL]
+- **Time Period**: [YYYY-MM-DD to YYYY-MM-DD]
+- **Sample Size**: [N observations]
+- **Geographic Coverage**: [Description]
 
 ## Reproducibility
 
-This template emphasizes computational reproducibility:
+This project follows reproducibility best practices:
 
-- **R Version Pinning**: `.Rversion` file + automatic checking in `.Rprofile`
-- **Package Locking**: `renv.lock` with exact versions
-- **sessionInfo()**: Automatically included in paper appendix
-- **Data Documentation**: Template in `data/README.md`
-- **Best Practices Guide**: See `REPRODUCIBILITY.md` for detailed guidance
+- **R Version Pinning**: R version fixed in `.Rversion`
+- **Package Locking**: All R package versions locked in `renv.lock`
+- **Computational Environment**: Full session info included in paper appendix
+- **Data Provenance**: All data sources documented in `data/README.md`
 
-**Quick reproducibility check:**
-```bash
-# Verify R version matches
-cat .Rversion
-
-# Check package synchronization
-Rscript -e "renv::status()"
-
-# Test clean render
-make clean && quarto render paper/index.qmd
-```
-
-## Contributing
-
-When using this template:
-
-1. Create a new branch for your work
-2. Make your changes
-3. Pre-commit hooks will automatically format your code
-4. Push and create a pull request
-5. CI/CD will render the paper and run checks
-
-## License
-
-This template is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Troubleshooting
-
-### Quarto not rendering
-
-Ensure all dependencies are installed:
-
-```bash
-quarto check install
-```
-
-### R package installation fails
-
-Try updating renv:
-
-```bash
-Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
-Rscript -e "renv::restore()"
-```
-
-### Julia packages not found
-
-Instantiate the Julia environment:
-
-```bash
-julia --project=. -e 'using Pkg; Pkg.instantiate()'
-```
-
-### LaTeX errors
-
-Install the full TeXLive distribution:
-
-- macOS: `brew install --cask mactex`
-- Ubuntu: `sudo apt-get install texlive-full`
-
-## Resources
-
-- [Quarto Documentation](https://quarto.org/docs/guide/)
-- [R for Data Science](https://r4ds.had.co.nz/)
-- [Julia Documentation](https://docs.julialang.org/)
-- [BibTeX Guide](http://www.bibtex.org/Using/)
-- [Pre-commit Hooks](https://pre-commit.com/)
+For detailed reproducibility guidelines, see [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
 
 ## Citation
 
-If you use this template, please consider citing it:
+<!-- Update with your paper's citation information -->
+
+If you use this code or data, please cite:
 
 ```bibtex
-@misc{papertemplate2025,
-  title = {Academic Paper Template},
-  author = {Azam, James},
-  year = {2025},
-  url = {https://github.com/yourusername/paper-template}
+@article{authorYYYY,
+  title   = {[Your Paper Title]},
+  author  = {[Last Name, First Name] and [Last Name, First Name]},
+  year    = {[YYYY]},
+  journal = {[Journal Name]},
+  volume  = {[Volume]},
+  number  = {[Number]},
+  pages   = {[Pages]},
+  doi     = {[10.xxxx/xxxxx]}
 }
 ```
+
+Alternatively, if not yet published:
+
+```bibtex
+@misc{authorYYYY,
+  title  = {[Your Paper Title]},
+  author = {[Last Name, First Name] and [Last Name, First Name]},
+  year   = {[YYYY]},
+  url    = {[GitHub repository URL]},
+  note   = {[Status: Working paper/Preprint/etc.]}
+}
+```
+
+## License
+
+<!-- Specify your license. Common choices: MIT, CC-BY-4.0, GPL-3.0 -->
+
+[Specify the license for your code and/or data]
+
+Example:
+- **Code**: MIT License
+- **Data**: CC-BY-4.0
+- **Paper**: All rights reserved (or specify if different)
+
+See [`LICENSE`](LICENSE) for details.
+
+## Contact
+
+For questions or comments, please contact [Lead Author Name] at [email@institution.edu] or open an issue in this repository.
+
+---
+
+**Template Information**: This project uses the [Academic Paper Template](TEMPLATE.md). For template setup and customization, see [`TEMPLATE.md`](TEMPLATE.md).
