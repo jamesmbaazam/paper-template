@@ -202,4 +202,4 @@ For questions or comments, please contact [Lead Author Name] at [email@instituti
 
 ---
 
-**Template Information**: This project uses the [Academic Paper Template](INSTRUCTIONS.md). For template setup and customization, see [`INSTRUCTIONS.md`](INSTRUCTIONS.md).
+**Template Information**: For template setup and customization, see [`TEMPLATE_GUIDE.md`](TEMPLATE_GUIDE.md).
