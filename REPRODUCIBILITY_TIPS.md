@@ -126,6 +126,7 @@ When selecting R packages, prioritize:
 - Reverse dependencies (other packages use it)
 
 **Check package health:**
+
 ```r
 # Check when package was last updated
 packageDescription("package_name")$Date
@@ -190,6 +191,7 @@ list(
 ```
 
 **Run pipeline:**
+
 ```r
 targets::tar_make()  # Run entire pipeline
 targets::tar_visnetwork()  # Visualize dependencies
