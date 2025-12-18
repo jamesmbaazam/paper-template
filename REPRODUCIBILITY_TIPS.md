@@ -179,18 +179,49 @@ clean:
 
 #### targets Package
 
-For R-native workflow management:
+For R-native workflow management using the same pipeline as the Makefile example:
 
 ```r
 # _targets.R
 library(targets)
+source("scripts/R/01_clean.R")    # Load cleaning functions
+source("scripts/R/02_visualize.R") # Load plotting functions
 
 list(
+  # Read raw data
   tar_target(raw_data, read.csv("data/raw/data.csv")),
-  tar_target(clean_data, process_data(raw_data)),
-  tar_target(model, fit_model(clean_data)),
-  tar_target(plot, create_plot(model)),
-  tar_target(report, quarto::quarto_render("paper/index.qmd"))
+
+  # Clean data (calls function from 01_clean.R)
+  tar_target(
+    clean_data_file,
+    {
+      clean_data <- clean_raw_data(raw_data)
+      saveRDS(clean_data, "data/processed/clean_data.rds")
+      "data/processed/clean_data.rds"
+    },
+    format = "file"
+  ),
+
+  # Generate figure (calls function from 02_visualize.R)
+  tar_target(
+    plot_file,
+    {
+      data <- readRDS(clean_data_file)
+      create_plot(data, "output/figures/plot1.png")
+      "output/figures/plot1.png"
+    },
+    format = "file"
+  ),
+
+  # Render paper
+  tar_target(
+    report,
+    {
+      quarto::quarto_render("paper/index.qmd")
+      "paper/index.pdf"
+    },
+    format = "file"
+  )
 )
 ```
 
@@ -202,6 +233,8 @@ targets::tar_visnetwork()  # Visualize dependencies
 ```
 
 **Benefits:** R-native, automatic dependency tracking, parallel execution, caching
+
+**Note:** The functions `clean_raw_data()` and `create_plot()` referenced above would be defined in your analysis scripts. Alternatively, you can define functions directly in `_targets.R` or use inline code without separate sourcing.
 
 ### Choosing an Orchestration Tool
 
