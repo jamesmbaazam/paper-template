@@ -107,7 +107,7 @@ writeLines(capture.output(citation()), "package-citations.txt")
 ### Local Testing
 
 1. Clone your repository to a new location
-2. Follow setup instructions from README
+2. Follow setup instructions from TEMPLATE.md (or README.md if project-specific)
 3. Run `quarto render paper/index.qmd`
 4. Compare output with previous version
 
@@ -182,7 +182,7 @@ Before sharing or publishing:
 - [ ] Raw data checksums calculated
 - [ ] `sessionInfo()` included in paper appendix
 - [ ] CI/CD workflow passing
-- [ ] README instructions tested on clean machine
+- [ ] Setup instructions (TEMPLATE.md) tested on clean machine
 - [ ] Output files match across different systems
 
 ## Further Reading
