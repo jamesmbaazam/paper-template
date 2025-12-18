@@ -171,7 +171,7 @@ clean:
 	rm -rf output/* data/processed/* paper/index.pdf
 ```
 
-**Benefits:** Only reruns changed components, shell-independent
+**Benefits:** Only reruns changed components (incremental builds)
 
 #### targets Package
 
