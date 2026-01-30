@@ -32,6 +32,7 @@ paper-template/
 │   ├── index.pdf        # Rendered PDF (gitignored)
 │   ├── references.bib   # Bibliography
 │   └── .wordlist.txt    # Custom spelling dictionary
+├── DESCRIPTION          # Project metadata and dependencies
 ├── _quarto.yml          # Quarto configuration
 ├── renv.lock            # R dependencies lockfile
 ├── Makefile             # Build automation

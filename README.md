@@ -121,6 +121,7 @@ All figures are automatically saved to `output/figures/` when you run the analys
 │   ├── index.qmd         # Main paper document
 │   ├── references.bib    # Bibliography
 │   └── index.pdf         # Rendered PDF (generated)
+├── DESCRIPTION           # Project metadata and dependencies
 ├── renv.lock             # R package versions
 ├── _quarto.yml           # Quarto configuration
 └── README.md             # This file
